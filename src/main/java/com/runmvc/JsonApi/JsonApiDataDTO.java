@@ -15,11 +15,13 @@ public class JsonApiDataDTO<T> {
   public JsonApiDataDTO(
     @JsonProperty("type") String type,
     @JsonProperty("id") String id,
-    @JsonProperty("attributes") T attributes
+    @JsonProperty("attributes") T attributes,
+    @JsonProperty("relationships") Map<String, JsonRelationDTO> relationships
     ) {
     this.type = type;
     this.id = id;
     this.attributes = attributes;
+    this.relationships = relationships;
   }
 
 
@@ -35,7 +37,7 @@ public class JsonApiDataDTO<T> {
     return this.attributes;
   }
 
-  public Object getRelation(String key) {
+  public String getRelationId(String key) {
     return this.relationships.get(key).getId();
   }
 }

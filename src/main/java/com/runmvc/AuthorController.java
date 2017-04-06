@@ -1,5 +1,6 @@
 package com.runmvc;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.runmvc.JsonApi.JsonApiDTO;
 import com.runmvc.JsonApi.JsonApiDataDTO;
 import com.runmvc.Serializers.AuthorSerializer;
@@ -20,6 +21,7 @@ import java.util.List;
 class Person {
     String first;
     Integer last;
+    String profileId;
 
     public String getFirst() {
         return this.first;
@@ -28,8 +30,17 @@ class Person {
         return this.last;
     }
 
+    public String getProfileId() {
+        return this.profileId;
+    }
+
+    @JsonProperty("first-name")
     public void setFirst(String val) {
         this.first = val;
+    }
+
+    public void setProfileId(String val) {
+        this.profileId = val;
     }
     public void setLast(Integer val) {
         this.last = val;
@@ -42,7 +53,14 @@ public class AuthorController {
 
     @RequestMapping(path = "/users", method = RequestMethod.POST)
     public Person saveAuthor(@RequestBody JsonApiDTO<Person> body) {
-        return body.getData().getEntity();
+        Person p = body.getData().getEntity();
+
+        System.out.println(body.getData().getRelationId("profile"));
+
+        p.setProfileId(body.getData().getRelationId("profile"));
+
+
+        return p;
     }
 
 
