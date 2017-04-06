@@ -1,6 +1,6 @@
-package com.runmvc;
+package com.runmvc.entities;
 
-import com.runmvc.Serializers.HasId;
+import com.runmvc.serializers.HasId;
 
 /**
  * Created by ryan on 4/3/17.

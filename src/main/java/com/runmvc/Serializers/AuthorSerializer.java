@@ -1,6 +1,6 @@
-package com.runmvc.Serializers;
+package com.runmvc.serializers;
 
-import com.runmvc.Author;
+import com.runmvc.entities.Author;
 
 import java.util.Map;
 import java.util.HashMap;
