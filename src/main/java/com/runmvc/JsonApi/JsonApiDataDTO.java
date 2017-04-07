@@ -1,4 +1,4 @@
-package com.runmvc.JsonApi;
+package com.runmvc.jsonApi;
 
 import java.util.Map;
 

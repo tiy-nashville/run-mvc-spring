@@ -1,12 +1,14 @@
-package com.runmvc;
+package com.runmvc.controllers;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.runmvc.JsonApi.JsonApiDTO;
-import com.runmvc.JsonApi.JsonApiDataDTO;
-import com.runmvc.Serializers.AuthorSerializer;
-import com.runmvc.Serializers.HasId;
-import com.runmvc.Serializers.RootSerializer;
+import com.runmvc.PersonRepository;
+import com.runmvc.entities.Author;
+import com.runmvc.entities.Person;
+import com.runmvc.jsonApi.JsonApiDTO;
+import com.runmvc.serializers.AuthorSerializer;
+import com.runmvc.serializers.HasId;
+import com.runmvc.serializers.RootSerializer;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,51 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
-
-
-class Person {
-    String first;
-    Integer last;
-    String profileId;
-
-    public String getFirst() {
-        return this.first;
-    }
-    public Integer getLast() {
-        return this.last;
-    }
-
-    public String getProfileId() {
-        return this.profileId;
-    }
-
-    @JsonProperty("first-name")
-    public void setFirst(String val) {
-        this.first = val;
-    }
-
-    public void setProfileId(String val) {
-        this.profileId = val;
-    }
-    public void setLast(Integer val) {
-        this.last = val;
-    }
-    
-}
 
 @RestController
 public class AuthorController {
 
+    @Autowired
+    PersonRepository persons;
+
     @RequestMapping(path = "/users", method = RequestMethod.POST)
-    public Person saveAuthor(@RequestBody JsonApiDTO<Person> body) {
+    Person saveAuthor(@RequestBody JsonApiDTO<Person> body) {
         Person p = body.getData().getEntity();
+        System.out.printf("Person = %s %d", p.getFirst(), p.getLast());
+        persons.save(p);
 
         System.out.println(body.getData().getRelationId("profile"));
 
         p.setProfileId(body.getData().getRelationId("profile"));
-
 
         return p;
     }

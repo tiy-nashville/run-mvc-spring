@@ -1,4 +1,4 @@
-package com.runmvc.Serializers;
+package com.runmvc.serializers;
 
 import java.util.HashMap;
 import java.util.List;

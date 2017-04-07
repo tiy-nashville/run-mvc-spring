@@ -1,4 +1,4 @@
-package com.runmvc.JsonApi;
+package com.runmvc.jsonApi;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,22 +16,23 @@ public class JsonRelationDTO {
   String getType() {
     return this.data.getType();
   }
-}
 
-class JsonRelationDataDTO {
-  String type;
-  String id;
 
-  public JsonRelationDataDTO(@JsonProperty("type") String type, @JsonProperty("id") String id) {
-    this.type = type;
-    this.id = id;
-  }
+  static class JsonRelationDataDTO {
+    String type;
+    String id;
 
-  String getId() {
-    return this.id;
-  }
-  
-  String getType() {
-    return this.type;
+    public JsonRelationDataDTO(@JsonProperty("type") String type, @JsonProperty("id") String id) {
+      this.type = type;
+      this.id = id;
+    }
+
+    String getId() {
+      return this.id;
+    }
+
+    String getType() {
+      return this.type;
+    }
   }
 }
